@@ -4,9 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>JS TVShow Watchlist</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Simple TV Show Watchlist</title>
 </head>
 <body>
+     
+     <div class = "container">
+        <h1>Show TV Watchlist</h1>
+        <form>
+            <div class = "form-group">
+                <label for = "title">Title: </label>
+                <input class = "form-control" type = "text" id = "title">
+            </div>
+            <div class = "form-group">
+                <label for = "rating">Rating: </label>
+                <select class = "form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <div class = "form-check form-check-inline">
+                <input class = "form-check-input" type = "radio" name = "status" value = "watching" checked>
+                <label class = "form-check-label" for = "status-watching">Watching</label>
+            </div>
+            <div class = "form-check form-check-inline">
+                <input class = "form-check-input" type = "radio" name = "status" value = "want to watch">   
+                <label class = "form-check-label"for = "status-planned">Want to watch</label>
+            </div>
+            <div class = "form-check form-check-inline">
+                <input class = "form-check-input" type = "radio" name = "status" value = "dropped">
+                <label class = "form-check-label" for = "status-dropped">Dropped</label>
+            </div>
+           
+        
+        </form>
+        
+     </div>
      
 </body>
 </html>
