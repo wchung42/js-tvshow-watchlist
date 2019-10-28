@@ -10,7 +10,7 @@
 <body>
      
      <div class = "container">
-        <h1>Show TV Watchlist</h1>
+        <h1>TV Show Watchlist</h1>
         <form>
             <div class = "form-group">
                 <label for = "title">Title: </label>
@@ -19,6 +19,7 @@
             <div class = "form-group">
                 <label for = "rating">Rating: </label>
                 <select id = "rating"class = "form-control">
+                    <option value="" disabled selected>Select your rating</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -27,26 +28,27 @@
                 </select>
             </div>
             <div class = "form-check form-check-inline">
-                <input class = "form-check-input" type = "radio" name = "status" value = "watched" id = "watched" checked>
+                <input class = "form-check-input" type = "radio" name = "status" value = "Watched" id = "watched" checked>
+                <label class = "form-check-label" for = "status-watching">Watched</label>
+            </div>
+            <div class = "form-check form-check-inline">
+                <input class = "form-check-input" type = "radio" name = "status" value = "Watching" id = "watching">
                 <label class = "form-check-label" for = "status-watching">Watching</label>
             </div>
             <div class = "form-check form-check-inline">
-                <input class = "form-check-input" type = "radio" name = "status" value = "watching" id = "watching">
-                <label class = "form-check-label" for = "status-watching">Watching</label>
-            </div>
-            <div class = "form-check form-check-inline">
-                <input class = "form-check-input" type = "radio" name = "status" value = "want to watch" id = "plan to">   
+                <input class = "form-check-input" type = "radio" name = "status" value = "Want to watch" id = "plan to">   
                 <label class = "form-check-label" for = "status-planned">Want to watch</label>
             </div>
             <div class = "form-check form-check-inline">
-                <input class = "form-check-input" type = "radio" name = "status" value = "dropped" id = "dropped">
+                <input class = "form-check-input" type = "radio" name = "status" value = "Dropped" id = "dropped">
                 <label class = "form-check-label" for = "status-dropped">Dropped</label>
             </div>
         </form>
         <button id = "submit-button" type = "submit" class = "btn btn-primary">Submit</button>
         <button id = "clear-button" type = "submit" class = "btn btn-danger">Clear</button>
 
-        <ul id = "watchlist" class = "list=group">
+        <br><br>
+        <ul id = "watchlist" class = "list-group" style = "list-style-type: none;">
 
         </ul>
         
@@ -77,19 +79,41 @@
             // create elements
             const list = document.getElementById("watchlist");
             const newItem = document.createElement("li");
-            const titleElement = document.createElement("h5");
+            const newCard = document.createElement("div");
+            const cardBody = document.createElement("div");
+            const titleElement = document.createElement("h4");
             const ratingElement = document.createElement("p");
             const statusElement = document.createElement("p");
-
-            titleElement.textContent = "Title: " + title;
+            const breakElement = document.createElement("br");
+            
+            titleElement.textContent = title;
             ratingElement.textContent = "Rating: " + rating;
             statusElement.textContent = "Status: " + status;
 
-            newItem.append(titleElement);
-            newItem.append(ratingElement);
-            newItem.append(statusElement);
+            // append elements
+            cardBody.appendChild(titleElement);
+            cardBody.appendChild(ratingElement);
+            cardBody.appendChild(statusElement);
+            newCard.appendChild(cardBody);
+            newItem.appendChild(newCard);
+            list.appendChild(newItem);
+            list.appendChild(breakElement);
 
-            list.append(newItem);
+            newCard.classList.add("card");
+            if (status === "Watched") {
+                newCard.classList.add("border-success");
+            } else if (status === "Watching") {
+                newCard.classList.add("border-dark");
+            } else if (status === "Want to watch") {
+                newCard.classList.add("border-warning");
+            } else {
+                newCard.classList.add("border-danger");
+            }
+            cardBody.classList.add("card-body");
+            titleElement.classList.add("card-header");
+            ratingElement.classList.add("card-text");
+            statusElement = classList.add("card-text");
+
          }
 
          function clearList (e) {
