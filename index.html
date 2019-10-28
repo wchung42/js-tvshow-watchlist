@@ -18,7 +18,7 @@
             </div>
             <div class = "form-group">
                 <label for = "rating">Rating: </label>
-                <select class = "form-control">
+                <select id = "rating"class = "form-control">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -27,22 +27,79 @@
                 </select>
             </div>
             <div class = "form-check form-check-inline">
-                <input class = "form-check-input" type = "radio" name = "status" value = "watching" checked>
+                <input class = "form-check-input" type = "radio" name = "status" value = "watched" id = "watched" checked>
                 <label class = "form-check-label" for = "status-watching">Watching</label>
             </div>
             <div class = "form-check form-check-inline">
-                <input class = "form-check-input" type = "radio" name = "status" value = "want to watch">   
-                <label class = "form-check-label"for = "status-planned">Want to watch</label>
+                <input class = "form-check-input" type = "radio" name = "status" value = "watching" id = "watching">
+                <label class = "form-check-label" for = "status-watching">Watching</label>
             </div>
             <div class = "form-check form-check-inline">
-                <input class = "form-check-input" type = "radio" name = "status" value = "dropped">
+                <input class = "form-check-input" type = "radio" name = "status" value = "want to watch" id = "plan to">   
+                <label class = "form-check-label" for = "status-planned">Want to watch</label>
+            </div>
+            <div class = "form-check form-check-inline">
+                <input class = "form-check-input" type = "radio" name = "status" value = "dropped" id = "dropped">
                 <label class = "form-check-label" for = "status-dropped">Dropped</label>
             </div>
-           
-        
         </form>
+        <button id = "submit-button" type = "submit" class = "btn btn-primary">Submit</button>
+        <button id = "clear-button" type = "submit" class = "btn btn-danger">Clear</button>
+
+        <ul id = "watchlist" class = "list=group">
+
+        </ul>
         
      </div>
+
+     <script>
+         function buttonHandlers () {
+             const submit_button = document.getElementById("submit-button");
+             const clear_button = document.getElementById("clear-button");
+             submit_button.addEventListener("click", addToList);
+             clear_button.addEventListener("click", clearList);
+         }
+
+         function getInfo () {
+             const title = document.getElementById("title").value;
+             const rating = document.getElementById("rating").value;
+             const status = document.querySelector('input[name="status"]:checked').value;
+             if (title !== "" && rating !== "" && status !== "") {
+                return [title, rating, status];
+             }
+             alert("Form is not complete");
+             return;
+         }
+
+         function addToList (e) {
+            e.preventDefault();
+            [title, rating, status] = getInfo();
+            // create elements
+            const list = document.getElementById("watchlist");
+            const newItem = document.createElement("li");
+            const titleElement = document.createElement("h5");
+            const ratingElement = document.createElement("p");
+            const statusElement = document.createElement("p");
+
+            titleElement.textContent = "Title: " + title;
+            ratingElement.textContent = "Rating: " + rating;
+            statusElement.textContent = "Status: " + status;
+
+            newItem.append(titleElement);
+            newItem.append(ratingElement);
+            newItem.append(statusElement);
+
+            list.append(newItem);
+         }
+
+         function clearList (e) {
+             const list = document.getElementById("watchlist");
+             if (list.children.length > 0) {
+                list.innerHTML = "";
+             }
+         }
+         window.onload = buttonHandlers;
+     </script>
      
 </body>
 </html>
